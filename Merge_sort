@@ -1,0 +1,33 @@
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+        
+ midpoint = len(arr) // 2
+    left_part = merge_sort(arr[:midpoint])
+    right_part = merge_sort(arr[midpoint:])
+
+    return combine(left_part, right_part)
+
+
+def combine(left, right):
+    combined_result = []
+    left_index = right_index = 0
+
+    while left_index < len(left) and right_index < len(right):
+        if left[left_index] <= right[right_index]:
+            combined_result.append(left[left_index])
+            left_index += 1
+        else:
+            combined_result.append(right[right_index])
+            right_index += 1
+
+    combined_result.extend(left[left_index:])
+    combined_result.extend(right[right_index:])
+
+    return combined_result
+
+
+arr = [104, 456, 50, 5, 8, 82, 10, 2]
+sorted_arr = merge_sort(arr)
+print(f"Исходный массив: {arr}")
+print(f"Отсортированный массив: {sorted_arr}")
